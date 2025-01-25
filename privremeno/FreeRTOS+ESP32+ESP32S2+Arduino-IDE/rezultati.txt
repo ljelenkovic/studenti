@@ -1,0 +1,22 @@
+Testiranje vremena odziva na događaj
+
+S1 - sustav koji se ispituje: ESP32 (ESP32 Dev Module)
+S2 - sustav kojim se S1 ispituje: ESP32-S2-MINI-1 (ESP32S2 Dev Module)
+
+Oba sustava su ostvarena na dva načina (postavka TEST_MODE u kodu)
+1. korištenjem prekida za detekciju promjene na ulazu (I - interrupt)
+2. korištenjem dretvi koje radnim čekanjem provjeravaju ulaz (T - task)
+
+Pinovi su navedeni u kodu (tako ih žicama spojiti):
+S1:REQUEST_PIN <-- S2:REQUEST_PIN
+S1:RESPONSE_PIN <-- S2:RESPONSE_PIN
+
+Izmjereno vrijeme odziva na sva četiri načina rada:
+S1	S2	AVG	MIN	MAX
+T	T	1,64	1	3
+I	T	2,96	1	3
+T	I	4,50	3	13
+I	I	5,48	5	14
+
+S dretvama je najbrže, ali one tada troše procesorsko vrijeme u radnom čekanju!
+Prekidi izgleda zbog konteksta imaju malo veći overhead.
