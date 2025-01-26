@@ -1,0 +1,11 @@
+choice BUILD_EXAMPLE
+    prompt "Examples"
+    help
+        Build the main firmware or one of the examples.
+    default BUILD_FIRMWARE
+
+    config BUILD_FIRMWARE
+        bool "Main firmware"
+    config EXAMPLE_RECORDER
+        bool "Microphone WAV recording to SD card"
+endchoice
